@@ -27,9 +27,7 @@ public abstract class PropertyFilter extends Filter {
     protected abstract boolean matchesSubFilter(File toFilter);
 
     @Override
-    protected boolean matchesFilter(File toFilter) {
-        return yesCondition == matchesSubFilter(toFilter) && !hasNOTcommand;
-    }
+    protected boolean matchesFilter(File toFilter) {return yesCondition == matchesSubFilter(toFilter);}
 
 
     @Override

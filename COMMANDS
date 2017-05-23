@@ -1,14 +1,3 @@
 FILTER
-executable#NOT#waht
-ORDER
-FILTER
-size
-ORDER
-abs
-FILTER
-prefix#ext
-ORDER
-FILTER
 all
 ORDER
-NONE

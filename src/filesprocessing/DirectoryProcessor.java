@@ -11,11 +11,10 @@ import java.util.ArrayList;
 
 public class DirectoryProcessor {
     public static void main(String[] args) {
-        String[] sourceFilesNames;
         try {
             analyzeFileErrors(args); //Todo expand to do all
             String[] commandLines = FilesToArrayFactory.getCommandLines(args[1]);
-            ArrayList<CommandSegment> commandSegments = SegementCommandsFactory.segmentCommands(commandLines);
+            ArrayList<CommandSegment> commandSegments = CommandSegementFactory.segmentCommands(commandLines);
             executeAll(commandSegments, new File(args[0]));
 
         } catch (FileInputException e) {System.err.println(e.getMessage());}

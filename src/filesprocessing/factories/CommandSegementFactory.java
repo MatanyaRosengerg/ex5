@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class SegementCommandsFactory {
+public class CommandSegementFactory {
 
     /**
      * Segments the command lines into the different sections. Each segment is of size 4, and may have an

@@ -55,13 +55,16 @@ public class FilterFactory {
                 case HIDDEN:
                     filter = new HiddenFilter(filterParameters);
                     break;
+                case ALL: filter = new AllFilter(filterParameters); break;
                 default:
-                    filter = new AllFilter(filterParameters);
-                    break;
+                    throw new CommandException("No Such Filter Name");
             }
             return filter;
 
-        } catch (CommandException ignored) {return new AllFilter(filterParameters);}
+        } catch (CommandException ignored) {
+            System.err.println("Cached at Filter Factory"); return new
+                    AllFilter();
+        }
     }
 
 

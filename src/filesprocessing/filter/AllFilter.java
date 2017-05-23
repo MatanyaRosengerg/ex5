@@ -9,20 +9,24 @@ public class AllFilter extends Filter {
 
 
     public AllFilter(String[] filterParameters) throws CommandException {
-        super(null);
-        //Check line to throw exeptions
-        //throw new CommandException("From filterFactory: Not A filter Name in line ");
+        super(filterParameters);
+
     }
     //TODO check null validity in AllFilter
+
+    public AllFilter() {
+        //Check line to throw exeptions
+        //throw new CommandException("From filterFactory: Not A filter Name in line ");
+        this.hasNOTcommand = false;
+    }
 
 
     @Override
     protected boolean matchesFilter(File toFilter) {
-        return false;
+        return true;
     }
 
     @Override
-    protected void setCommandParameters(String[] filterLine) {
-    }//Todo
+    protected void setCommandParameters(String[] filterLine) {}//Todo?
 
 }
