@@ -2,10 +2,19 @@ package filesprocessing.order;
 
 import filesprocessing.exception.Type1Exception;
 
+import java.io.File;
+import java.util.ArrayList;
+
 /**
  * Created by Ofri Wienner on 25/05/2017.
  */
 public class AbsOrder extends Order {
+
+    public AbsOrder(String[] orderParameters) throws Type1Exception {
+        super(orderParameters);
+        comperator = new AbsCompare(isReversed);
+    }
+
     /**
      * Convert text to parameters
      *
@@ -16,4 +25,6 @@ public class AbsOrder extends Order {
     protected void setCommandParameters(String[] orderLine) throws Type1Exception {
         //TODO implement
     }
+
+
 }

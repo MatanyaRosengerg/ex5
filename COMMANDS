@@ -1,3 +1,4 @@
 FILTER
-all#NOT
+all
 ORDER
+absoulute#REVERSE

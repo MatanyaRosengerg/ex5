@@ -17,6 +17,10 @@ public abstract class Order {
     /** The user format for using the REVERSE suffix */
     private static final String REVERSE = "REVERSE";
 
+    /**
+     * Comperator that match the order's type.
+     */
+    Comperator comperator;
 
     /**
      * Constructs the order, verifies the parameters, and sets the command parameters for the order command.
@@ -47,17 +51,16 @@ public abstract class Order {
      *
      * @param dirFiles the files to order (ArrayList<File>)
      */
-    public ArrayList<File> doOrder(ArrayList<File> dirFiles) {
-        //TODO implement!
-        return null;
+    public ArrayList<File> doOrder(ArrayList<File> dirFiles){
+        dirFiles.sort(comperator);
+        return dirFiles;
     }
 
     /**
      * Set the REVERSE command according to the suffix. This is done only after verifying the the format of
      * the command line is good.
      */
-    private void setReversed()
-    {
+    private void setReversed(){
         this.isReversed = orderParameters[orderParameters.length - 1].equals(REVERSE);
     }
 }

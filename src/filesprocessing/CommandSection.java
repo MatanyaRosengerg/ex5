@@ -90,7 +90,17 @@ public class CommandSection {
 
         Collections.addAll(filteredDirectory, files);
         filteredDirectory = filter.doFilter(filteredDirectory);
-        //TODO same Shit with order
+
+        try {
+            //order = OrderFactory.getOrderByCommand(orderParameters);
+
+            order = new AbsOrder(orderParameters); //TODO change
+        } catch (Type1Exception e) {
+          //  printWarningMessage(e, headLineIndex + FILTER__SUB_IDX);
+           // filter = new AllFilter();
+        }
+
+        filteredDirectory = order.doOrder(filteredDirectory);
 
         for(File file: filteredDirectory){System.out.println(file.getName());}
 
