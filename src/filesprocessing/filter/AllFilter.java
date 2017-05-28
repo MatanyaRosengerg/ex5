@@ -1,6 +1,6 @@
 package filesprocessing.filter;
 
-import filesprocessing.fileFormatExceptions.CommandException;
+import filesprocessing.exception.Type1Exception;
 
 import java.io.File;
 
@@ -8,16 +8,16 @@ import java.io.File;
 public class AllFilter extends Filter {
 
 
-    public AllFilter(String[] filterParameters) throws CommandException {
+    public AllFilter(String[] filterParameters) throws Type1Exception {
         super(filterParameters);
 
     }
     //TODO check null validity in AllFilter
 
     public AllFilter() {
-        //Check line to throw exeptions
-        //throw new CommandException("From filterFactory: Not A filter Name in line ");
-        this.hasNOTcommand = false;
+        //TODO Check line to throw exeptions
+        //throw new Type1Exception("From filterFactory: Not A filter Name in line ");
+        this.isNOTcommand = false;
     }
 
 
@@ -27,6 +27,8 @@ public class AllFilter extends Filter {
     }
 
     @Override
-    protected void setCommandParameters(String[] filterLine) {}//Todo?
+    protected void setCommandParameters(String[] filterLine) {
+        
+    }//Todo?
 
 }

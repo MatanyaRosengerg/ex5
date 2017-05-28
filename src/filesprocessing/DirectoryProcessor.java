@@ -2,7 +2,7 @@ package filesprocessing;
 
 
 import filesprocessing.factories.*;
-import filesprocessing.fileFormatExceptions.*;
+import filesprocessing.exception.*;
 
 
 import java.io.File;
@@ -14,22 +14,26 @@ public class DirectoryProcessor {
         try {
             analyzeFileErrors(args); //Todo expand to do all
             String[] commandLines = FilesToArrayFactory.getCommandLines(args[1]);
-            ArrayList<CommandSegment> commandSegments = CommandSegementFactory.segmentCommands(commandLines);
-            executeAll(commandSegments, new File(args[0]));
+            ArrayList<CommandSection> commandSections = CommandSectionFactory.sectionCommands(commandLines);
+            executeAll(commandSections, new File(args[0]));
 
-        } catch (FileInputException e) {System.err.println(e.getMessage());}
+        } catch (Type2Exception e) {
+            System.err.println(e.getMessage());
+        }
 
-
-    }
-
-    private static void analyzeFileErrors(String[] args) throws FileInputException {
-        if (args.length != 2) {throw new FileInputException("ERROR: should be only 2 arguments");}
 
     }
 
-    private static void executeAll(ArrayList<CommandSegment> commandSegments, File directory) {
-        for (CommandSegment commandSegment : commandSegments) {
-            commandSegment.doCommands(directory);
+    private static void analyzeFileErrors(String[] args) throws Type2Exception {
+        if (args.length != 2) {
+            throw new Type2Exception("ERROR: should be only 2 arguments");
+        }
+
+    }
+
+    private static void executeAll(ArrayList<CommandSection> commandSections, File directory) {
+        for (CommandSection commandSection : commandSections) {
+            commandSection.doCommand(directory);
             //TODO how not to change the directory files??
         }
     }

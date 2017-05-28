@@ -1,6 +1,6 @@
 package filesprocessing.filter;
 
-import filesprocessing.fileFormatExceptions.CommandException;
+import filesprocessing.exception.Type1Exception;
 
 import java.io.File;
 
@@ -8,15 +8,14 @@ import java.io.File;
 public abstract class PropertyFilter extends Filter {
     private static final String YES = "YES";
     private static final String NO = "NO";
-    private final int CONDITION_IDX = 1;
-    private final int MAX_COMMAND_LENGTH = 3;
-    private final int MIN_COMMAND_LENGTH = 2;
-    private final int SUFFIX_IDX = 2;
+    private static final int CONDITION_IDX = 1;
+    private static final int MAX_COMMAND_LENGTH = 3;
+    private static final int MIN_COMMAND_LENGTH = 2;
+    private static final int SUFFIX_IDX = 2;
 
     protected boolean yesCondition;
 
-
-    public PropertyFilter(String[] filterParameters) throws CommandException {super(filterParameters); }
+    public PropertyFilter(String[] filterParameters) throws Type1Exception {super(filterParameters); }
 
     /**
      * Determines if a file meets the condition of the filter type of this class's sons.
@@ -31,16 +30,19 @@ public abstract class PropertyFilter extends Filter {
 
 
     @Override
-    protected void setCommandParameters(String[] filterLine) throws CommandException {
+    protected void setCommandParameters(String[] filterLine) throws Type1Exception {
         boolean format = (filterLine.length >= MIN_COMMAND_LENGTH) &&
                 (filterLine[CONDITION_IDX].equals(NO) || filterLine[CONDITION_IDX].equals(YES)) &&
                 (filterLine.length <= MAX_COMMAND_LENGTH) && (filterLine.length != MAX_COMMAND_LENGTH ||
                 filterLine[SUFFIX_IDX].equals(NOT));
-        if (!format) { throw new CommandException("Error in line <X>"); }//TODO
-        else {setCondition();}
+        if (!format) {
+            throw new Type1Exception("Error in line <X>"); //TODO
+        } else {
+            setCondition();
+        }
     }
 
-    /** Sets the YES/No condition for the property filters */
+    /** Sets the YES/NO condition for the property filters */
     private void setCondition() {this.yesCondition = filterParameters[CONDITION_IDX].equals(YES);}
 
 

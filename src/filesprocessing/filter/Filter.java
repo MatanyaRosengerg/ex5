@@ -1,29 +1,35 @@
 package filesprocessing.filter;
 
 
-import filesprocessing.fileFormatExceptions.CommandException;
+import filesprocessing.exception.Type1Exception;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public abstract class Filter {
+    /**
+     * number of valid parameters
+     */
+    private static int numberOfParameters;
+
     /** the line of the filter sub-section command after being split into by "#" */
     protected String[] filterParameters;
 
     /** the parameter that determines if the NOT suffix is in the command */
-    protected boolean hasNOTcommand;
+    protected boolean isNOTcommand;
 
     /** The user format for using the NOT suffix */
     static final String NOT = "NOT";
+    static final String NO = "NO";
 
 
     /**
      * Constructs the filter, verifies the parameters, and sets the command prameters for the filter.
      *
      * @param filterParameters the line of the filter sub-section command after being split into by "#"
-     * @throws CommandException if the command format isn't good
+     * @throws Type1Exception if the command format isn't good
      */
-    Filter(String[] filterParameters) throws CommandException {
+    Filter(String[] filterParameters) throws Type1Exception {
         this.filterParameters = filterParameters;
         setCommandParameters(filterParameters);
         setNOTCommand();
@@ -42,7 +48,12 @@ public abstract class Filter {
      */
     protected abstract boolean matchesFilter(File toFilter);
 
-    protected abstract void setCommandParameters(String[] filterLine) throws CommandException;
+    /**
+     * Convert text to parameters
+     * @param filterLine String[] of parameters' text
+     * @throws Type1Exception Throw Type1 Exception if the parameters are wrong
+     */
+    protected abstract void setCommandParameters(String[] filterLine) throws Type1Exception;
 
     /**
      * Filteres the files according to wheather or not they match the filter command line conditions.
@@ -50,10 +61,10 @@ public abstract class Filter {
      * @param dirFiles the files to filter (ArrayList<File>)
      */
     public ArrayList<File> doFilter(ArrayList<File> dirFiles) {//TODO consider making and returning a new list
-        ArrayList<File> filteredFiles = new ArrayList<File>();
+        ArrayList<File> filteredFiles = new ArrayList<>();
         filterDirectories(dirFiles);
         for (File file : dirFiles) {
-            if (!file.isDirectory() && (matchesFilter(file) == !hasNOTcommand)) {filteredFiles.add(file);}
+            if (!file.isDirectory() && (matchesFilter(file) == !isNOTcommand)) {filteredFiles.add(file);}
         }
         return filteredFiles;
     }
@@ -69,11 +80,23 @@ public abstract class Filter {
     }
 
     /**
-     * Set the NOT command according to the suffix. This is doen only after verifying the the format of
+     * Set the NOT command according to the suffix. This is done only after verifying the the format of
      * the command line is good.
      */
     private void setNOTCommand() {
-        this.hasNOTcommand = filterParameters[filterParameters.length - 1].equals(NOT);
+        this.isNOTcommand = filterParameters[filterParameters.length - 1].equals(NOT);
+    }
+
+    /**
+     * Check if the numbeer of parameters is valid.
+     * @param filterLine The parameters as String array
+     * @param numberOfParameters Valid number of parameters.
+     * @throws Type1Exception Throw Exception if invalid
+     */
+    static void checkNumberOfParameters(String[] filterLine, int numberOfParameters) throws Type1Exception{
+        if (filterLine.length != numberOfParameters + 1 && filterLine.length != numberOfParameters + 2) {
+            throw new Type1Exception("");
+        }
     }
 }
 

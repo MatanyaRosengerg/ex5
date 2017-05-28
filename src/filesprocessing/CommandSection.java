@@ -2,7 +2,7 @@ package filesprocessing;
 
 
 import filesprocessing.factories.FilterFactory;
-import filesprocessing.fileFormatExceptions.*;
+import filesprocessing.exception.*;
 import filesprocessing.filter.*;
 import filesprocessing.order.*;
 
@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CommandSegment {
+public class CommandSection {
     public static final String FILTER = "FILTER";
     private static final String ORDER = "ORDER";
     public static final String EMPTY = "";
@@ -23,6 +23,7 @@ public class CommandSegment {
 
 
     /** indices of the lines in the sections of the commands file */
+
     public static final int SECTION_LENGTH = 4;
     private static final int FILTER_IDX = 0;
     private static final int FILTER__SUB_IDX = 1;
@@ -39,34 +40,34 @@ public class CommandSegment {
     private Order order;
 
     /**
-     * Constructs a new CommandSegment instance. Throws type II exception (FileInputException) if there is
+     * Constructs a new CommandSection instance. Throws type II exception (Type2Exception) if there is
      * a format error in the command section.
      *
      * @param stringSegment Array of the lines of the command segment from the commands file
      * @param headLineIndex The line number of the first line  in the commands file
-     * @throws FileInputException throws if the segments is not properly formatted (no FILTER or ORDER
+     * @throws Type2Exception throws if the segments is not properly formatted (no FILTER or ORDER
      *                            headlines)
      */
-    public CommandSegment(String[] stringSegment, int headLineIndex) throws FileInputException {
+    public CommandSection(String[] stringSegment, int headLineIndex) throws Type2Exception {
         this.headLineIndex = headLineIndex;
-        checkSegmentFormatErrors(stringSegment); //@throws FileInputException
+        checkSegmentFormatErrors(stringSegment); //@throws Type2Exception
         filterParameters = breakUpCommandLine(stringSegment[FILTER__SUB_IDX]);
         orderParameters = breakUpCommandLine(stringSegment[ORDER__SUB_IDX]); //May be empty!
     }
 
     /**
-     * Checks if a command segment has a FILTER section and an ORDER section. throws a FileInputException if
+     * Checks if a command segment has a FILTER section and an ORDER section. throws a Type2Exception if
      * one is missing (if both are missing, the error is for the FILTER).
      *
      * @param commandSegment Segment to check
-     * @throws FileInputException if one the (supposed) head lines are not in format
+     * @throws Type2Exception if one the (supposed) head lines are not in format
      */
-    private void checkSegmentFormatErrors(String[] commandSegment) throws FileInputException {
+    private void checkSegmentFormatErrors(String[] commandSegment) throws Type2Exception {
         if (!commandSegment[FILTER_IDX].equals(FILTER)) {
-            throw new FileInputException(errorMessage(MISSING_FILTER, headLineIndex + FILTER_IDX));
+            throw new Type2Exception(errorMessage(MISSING_FILTER, headLineIndex + FILTER_IDX));
         }
         if (!commandSegment[ORDER_IDX].equals(ORDER)) {
-            throw new FileInputException(errorMessage(MISSING_ORDER, headLineIndex + ORDER_IDX));
+            throw new Type2Exception(errorMessage(MISSING_ORDER, headLineIndex + ORDER_IDX));
         }
     }
 
@@ -75,10 +76,10 @@ public class CommandSegment {
      *
      * @param directory The directory to sort and print its files
      */
-    public void doCommands(File directory) {//TODO finish other classes and then write this method!...?
+    public void doCommand(File directory) {//TODO finish other classes and then write this method!...?
         try {
             filter = FilterFactory.getFilterByCommand(filterParameters);
-        } catch (CommandException e) {
+        } catch (Type1Exception e) {
             printWarningMessage(e, headLineIndex + FILTER__SUB_IDX);
             filter = new AllFilter();
         }
@@ -102,7 +103,7 @@ public class CommandSegment {
      * @param exception the thrown exception
      * @param lineNum   the line in which the exception occurred
      */
-    private static void printWarningMessage(CommandException exception, int lineNum) {
+    private static void printWarningMessage(Type1Exception exception, int lineNum) {
         System.err.println(exception.getMessage() + lineNum);//TODO properly format the error messages!
     }
 

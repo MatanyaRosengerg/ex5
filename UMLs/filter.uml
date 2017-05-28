@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>filesprocessing.filter</OriginalElement>
+  <nodes>
+    <node x="238.99999999999994" y="323.0">filesprocessing.filter.ContainsFilter</node>
+    <node x="878.5" y="301.0">filesprocessing.filter.PropertyFilter</node>
+    <node x="0.0" y="312.0">filesprocessing.filter.AllFilter</node>
+    <node x="487.74999999999994" y="0.0">filesprocessing.filter.Filter</node>
+    <node x="1168.5" y="323.0">filesprocessing.filter.BetweenFilter</node>
+    <node x="59.5" y="513.5">filesprocessing.filter.SuffixFilter</node>
+    <node x="253.49999999999994" y="491.0">filesprocessing.filter.FileFilter</node>
+    <node x="476.49999999999994" y="513.5">filesprocessing.filter.PrefixFilter</node>
+    <node x="911.5" y="502.0">filesprocessing.filter.HiddenFilter</node>
+    <node x="1135.5" y="502.0">filesprocessing.filter.WritableFilter</node>
+    <node x="670.5" y="502.0">filesprocessing.filter.ExecutableFilter</node>
+    <node x="549.75" y="323.0">filesprocessing.filter.GreaterThanFilter</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="filesprocessing.filter.ContainsFilter" target="filesprocessing.filter.Filter">
+      <point x="0.0" y="-48.0" />
+      <point x="354.99999999999994" y="281.0" />
+      <point x="599.95" y="281.0" />
+      <point x="-74.79999999999995" y="125.5" />
+    </edge>
+    <edge source="filesprocessing.filter.FileFilter" target="filesprocessing.filter.ContainsFilter">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="filesprocessing.filter.HiddenFilter" target="filesprocessing.filter.PropertyFilter">
+      <point x="0.0" y="-37.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="filesprocessing.filter.SuffixFilter" target="filesprocessing.filter.ContainsFilter">
+      <point x="0.0" y="-25.5" />
+      <point x="146.5" y="466.0" />
+      <point x="277.66666666666663" y="466.0" />
+      <point x="-77.33333333333331" y="48.0" />
+    </edge>
+    <edge source="filesprocessing.filter.PrefixFilter" target="filesprocessing.filter.ContainsFilter">
+      <point x="0.0" y="-25.5" />
+      <point x="563.5" y="466.0" />
+      <point x="432.33333333333326" y="466.0" />
+      <point x="77.33333333333331" y="48.0" />
+    </edge>
+    <edge source="filesprocessing.filter.WritableFilter" target="filesprocessing.filter.PropertyFilter">
+      <point x="0.0" y="-37.0" />
+      <point x="1240.0" y="466.0" />
+      <point x="1103.5" y="466.0" />
+      <point x="90.0" y="70.0" />
+    </edge>
+    <edge source="filesprocessing.filter.GreaterThanFilter" target="filesprocessing.filter.Filter">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="filesprocessing.filter.AllFilter" target="filesprocessing.filter.Filter">
+      <point x="0.0" y="-59.0" />
+      <point x="109.5" y="271.0" />
+      <point x="525.1499999999999" y="271.0" />
+      <point x="-149.60000000000002" y="125.5" />
+    </edge>
+    <edge source="filesprocessing.filter.PropertyFilter" target="filesprocessing.filter.Filter">
+      <point x="0.0" y="-70.0" />
+      <point x="1013.5" y="281.0" />
+      <point x="749.55" y="281.0" />
+      <point x="74.80000000000007" y="125.5" />
+    </edge>
+    <edge source="filesprocessing.filter.BetweenFilter" target="filesprocessing.filter.Filter">
+      <point x="0.0" y="-48.0" />
+      <point x="1283.5" y="271.0" />
+      <point x="824.3500000000001" y="271.0" />
+      <point x="149.60000000000014" y="125.5" />
+    </edge>
+    <edge source="filesprocessing.filter.ExecutableFilter" target="filesprocessing.filter.PropertyFilter">
+      <point x="0.0" y="-37.0" />
+      <point x="781.0" y="466.0" />
+      <point x="923.5" y="466.0" />
+      <point x="-90.0" y="70.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7427766032417196" x="699.5" y="293.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

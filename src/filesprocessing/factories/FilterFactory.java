@@ -1,15 +1,16 @@
 package filesprocessing.factories;
 
 
-import filesprocessing.CommandSegment;
-import filesprocessing.fileFormatExceptions.CommandException;
+import filesprocessing.CommandSection;
+import filesprocessing.exception.Type1Exception;
 import filesprocessing.filter.*;
 
 public class FilterFactory {
 
 
     /** Filter Names */
-    private static final String GREATER_THAT = "greater_then";
+    private static final String GREATER_THAN = "greater_than";
+    private static final String SMALLER_THAN = "smaller_than";
     private static final String BETWEEN = "between";
     private static final String FILE = "file";
     private static final String CONTAINS = "contains";
@@ -21,15 +22,18 @@ public class FilterFactory {
     private static final String ALL = "all";
 
 
-    public static Filter getFilterByCommand(String[] filterParameters) throws CommandException {
+    public static Filter getFilterByCommand(String[] filterParameters) throws Type1Exception {
 
-        String filterName = filterParameters[CommandSegment.FILTER_NAME_IDX];
+        String filterName = filterParameters[CommandSection.FILTER_NAME_IDX];
 
         Filter filter;
         try {
             switch (filterName) {
-                case GREATER_THAT:
+                case GREATER_THAN:
                     filter = new GreaterThanFilter(filterParameters);
+                    break;
+                case SMALLER_THAN:
+                    filter = new SmallerThanFilter(filterParameters);
                     break;
                 case BETWEEN:
                     filter = new BetweenFilter(filterParameters);
@@ -55,15 +59,17 @@ public class FilterFactory {
                 case HIDDEN:
                     filter = new HiddenFilter(filterParameters);
                     break;
-                case ALL: filter = new AllFilter(filterParameters); break;
+                case ALL:
+                    filter = new AllFilter(filterParameters);
+                    break;
                 default:
-                    throw new CommandException("No Such Filter Name");
+                    throw new Type1Exception("No Such Filter Name");
             }
             return filter;
 
-        } catch (CommandException ignored) {
-            System.err.println("Cached at Filter Factory"); return new
-                    AllFilter();
+        } catch (Type1Exception ignored) {
+            System.err.println("Cached at Filter Factory");
+            return new AllFilter();
         }
     }
 

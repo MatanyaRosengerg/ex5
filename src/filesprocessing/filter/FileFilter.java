@@ -1,21 +1,26 @@
 package filesprocessing.filter;
 
-import filesprocessing.fileFormatExceptions.CommandException;
+import filesprocessing.exception.Type1Exception;
 
 import java.io.File;
 
 
-public class FileFilter extends ContainsFilter {
+public class FileFilter extends Filter {
+    private static int numberOfParameters = 1;
 
-    public FileFilter(String[] filterParameters) throws CommandException {super(filterParameters);}
+    private String fileNameParameter;
+
+    public FileFilter(String[] filterParameters) throws Type1Exception {super(filterParameters);}
 
     @Override
     protected boolean matchesFilter(File toFilter) {
-        return false;
+        return toFilter.getName().equals(fileNameParameter);
     }
 
     @Override
-    protected void setCommandParameters(String[] filterLine) {
+    protected void setCommandParameters(String[] filterLine) throws Type1Exception {
+        checkNumberOfParameters(filterLine, numberOfParameters);
+        fileNameParameter = filterLine[1];
     }
 
 }

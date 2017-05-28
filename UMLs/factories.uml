@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>filesprocessing.factories</OriginalElement>
+  <nodes>
+    <node x="0.0" y="0.0">filesprocessing.factories.FilterFactory</node>
+    <node x="406.0" y="-3.0">filesprocessing.factories.FilesToArrayFactory</node>
+    <node x="409.0" y="108.0">filesprocessing.factories.CommandSectionFactory</node>
+    <node x="409.0" y="184.0">filesprocessing.factories.file2array</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.1" x="393.09090909090907" y="170.65151515151513" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

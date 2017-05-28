@@ -1,7 +1,7 @@
 package filesprocessing.factories;
 
 
-import filesprocessing.fileFormatExceptions.FileInputException;
+import filesprocessing.exception.Type2Exception;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,15 +13,15 @@ public class FilesToArrayFactory {
      *
      * @param sourceDirPath the directory of the files
      * @return array of the file's names
-     * @throws FileInputException - if there is something wrong with the directory
+     * @throws Type2Exception - if there is something wrong with the directory
      */
-    public static String[] getSourceNames(String sourceDirPath) throws FileInputException {
+    public static String[] getSourceNames(String sourceDirPath) throws Type2Exception {
         File source = new File(sourceDirPath);
-        if (!source.exists()) {throw new FileInputException("Source Does Not Exist" + sourceDirPath);}
-        if (!source.isDirectory()) {throw new FileInputException("Source is Not a Directory");}
+        if (!source.exists()) {throw new Type2Exception("Source Does Not Exist" + sourceDirPath);}
+        if (!source.isDirectory()) {throw new Type2Exception("Source is Not a Directory");}
 
         File[] sourceFiles = source.listFiles();
-        if (sourceFiles == null) {throw new FileInputException("Source is Empty");}//TODO
+        if (sourceFiles == null) {throw new Type2Exception("Source is Empty");}//TODO
 
         String[] sourceFileNames = new String[sourceFiles.length];
         for (int i = 0; i < sourceFiles.length; i++) {sourceFileNames[i] = sourceFiles[i].getName();}

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class AnalyzeCommandsFile { //TODO make a class of CommandSegment
+public class AnalyzeCommandsFile { //TO DO make a class of CommandSection
     private static final String FILTER = "FILTER";
     private static final String ORDER = "ORDER";
     private static final String MISSING_FILTER = "ERROR: Missing Filter sub section \n";
