@@ -22,8 +22,10 @@ public class SmallerThanFilter extends Filter {
         checkNumberOfParameters(filterLine, numberOfParameters);
         try {
             maxSize = Double.parseDouble(filterLine[1]);
+            if (maxSize < 0)
+                throw new Type1Exception();
         }catch (Exception e) {
-            throw new Type1Exception(""); //TODO maybe add a message
+            throw new Type1Exception(); //TODO maybe add a message
         }
     }
 

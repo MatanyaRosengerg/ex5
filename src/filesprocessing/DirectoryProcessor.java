@@ -20,21 +20,18 @@ public class DirectoryProcessor {
         } catch (Type2Exception e) {
             System.err.println(e.getMessage());
         }
-
-
     }
 
     private static void analyzeFileErrors(String[] args) throws Type2Exception {
         if (args.length != 2) {
-            throw new Type2Exception("ERROR: should be only 2 arguments");
+            throw new Type2Exception();
         }
 
     }
 
-    private static void executeAll(ArrayList<CommandSection> commandSections, File directory) {
+    private static void executeAll(ArrayList<CommandSection> commandSections, File directory) throws Type2Exception{
         for (CommandSection commandSection : commandSections) {
             commandSection.doCommand(directory);
-            //TODO how not to change the directory files??
         }
     }
 

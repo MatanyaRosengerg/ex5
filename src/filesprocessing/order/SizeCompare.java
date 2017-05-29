@@ -14,6 +14,6 @@ public class SizeCompare extends Comperator {
 
     @Override
     public int compare(File file1, File file2) {
-        return Long.compare(file1.length(), file2.length());
+        return isReversed * Long.compare(file1.length(), file2.length());
     }
 }

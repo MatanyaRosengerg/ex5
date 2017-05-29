@@ -36,7 +36,7 @@ public abstract class PropertyFilter extends Filter {
                 (filterLine.length <= MAX_COMMAND_LENGTH) && (filterLine.length != MAX_COMMAND_LENGTH ||
                 filterLine[SUFFIX_IDX].equals(NOT));
         if (!format) {
-            throw new Type1Exception("Error in line <X>"); //TODO
+            throw new Type1Exception(); //TODO
         } else {
             setCondition();
         }

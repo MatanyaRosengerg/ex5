@@ -63,13 +63,12 @@ public class FilterFactory {
                     filter = new AllFilter(filterParameters);
                     break;
                 default:
-                    throw new Type1Exception("No Such Filter Name");
+                    throw new Type1Exception();
             }
             return filter;
 
         } catch (Type1Exception ignored) {
-            System.err.println("Cached at Filter Factory");
-            return new AllFilter();
+            throw new Type1Exception();
         }
     }
 

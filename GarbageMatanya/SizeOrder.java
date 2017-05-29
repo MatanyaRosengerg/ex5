@@ -1,6 +1,7 @@
-package filesprocessing.order;
+package GarbageMatanya;
 
 import filesprocessing.exception.Type1Exception;
+import filesprocessing.order.Order;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by Ofri Wienner on 25/05/2017.
  */
-public class TypeOrder extends Order {
+public class SizeOrder extends Order {
     /**
      * Convert text to parameters
      *

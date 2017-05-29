@@ -64,10 +64,10 @@ public class CommandSection {
      */
     private void checkSegmentFormatErrors(String[] commandSegment) throws Type2Exception {
         if (!commandSegment[FILTER_IDX].equals(FILTER)) {
-            throw new Type2Exception(errorMessage(MISSING_FILTER, headLineIndex + FILTER_IDX));
+            throw new Type2Exception();
         }
         if (!commandSegment[ORDER_IDX].equals(ORDER)) {
-            throw new Type2Exception(errorMessage(MISSING_ORDER, headLineIndex + ORDER_IDX));
+            throw new Type2Exception();
         }
     }
 
@@ -76,45 +76,31 @@ public class CommandSection {
      *
      * @param directory The directory to sort and print its files
      */
-    public void doCommand(File directory) {//TODO finish other classes and then write this method!...?
+    public void doCommand(File directory) throws Type2Exception {
+
         try {
             filter = FilterFactory.getFilterByCommand(filterParameters);
         } catch (Type1Exception e) {
             printWarningMessage(e, headLineIndex + FILTER__SUB_IDX);
             filter = new AllFilter();
         }
-        //try and same shit with Order
-
-        ArrayList<File> filteredDirectory = new ArrayList<>();//TODO = DO somthing - this is not good
-        File[] files = directory.listFiles();
-
-        Collections.addAll(filteredDirectory, files);
-        filteredDirectory = filter.doFilter(filteredDirectory);
 
         try {
-            //order = OrderFactory.getOrderByCommand(orderParameters);
-
-            order = new AbsOrder(orderParameters); //TODO change
+            order = new Order(orderParameters);
         } catch (Type1Exception e) {
-          //  printWarningMessage(e, headLineIndex + FILTER__SUB_IDX);
-           // filter = new AllFilter();
+            printWarningMessage(e, headLineIndex + ORDER__SUB_IDX);
+            order = new Order();
         }
 
+        ArrayList<File> filteredDirectory = new ArrayList<>();
+        File[] files = directory.listFiles();
+        if (files == null)
+            throw new Type2Exception();
+        Collections.addAll(filteredDirectory, files);
+        filteredDirectory = filter.doFilter(filteredDirectory);
         filteredDirectory = order.doOrder(filteredDirectory);
-
         for(File file: filteredDirectory){System.out.println(file.getName());}
 
-    }
-
-
-    /**
-     * Prints an error message the stdeer with an indication for the line number in which the error occurred
-     *
-     * @param exception the thrown exception
-     * @param lineNum   the line in which the exception occurred
-     */
-    private static void printWarningMessage(Type1Exception exception, int lineNum) {
-        System.err.println(exception.getMessage() + lineNum);//TODO properly format the error messages!
     }
 
     /**
@@ -126,6 +112,16 @@ public class CommandSection {
      */
     private static String errorMessage(String errorMessage, int lineNum) {
         return (errorMessage + lineNum + "\n");//TODO make it in a new exception class!!?
+    }
+
+    /**
+     * Prints an error message the stdeer with an indication for the line number in which the error occurred
+     *
+     * @param exception the thrown exception
+     * @param lineNum   the line in which the exception occurred
+     */
+    private static void printWarningMessage(Type1Exception exception, int lineNum) {
+        System.err.println("Warning in line " + lineNum);
     }
 
     /**

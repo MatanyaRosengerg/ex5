@@ -23,8 +23,10 @@ public class BetweenFilter extends Filter {
         try {
             minSize = Double.parseDouble(filterLine[1]);
             maxSize = Double.parseDouble(filterLine[2]);
+            if (minSize < 0 || maxSize < 0 || minSize > maxSize)
+                throw new Type1Exception();
         }catch (Exception e) {
-            throw new Type1Exception(""); //TODO maybe add a message
+            throw new Type1Exception(); //TODO maybe add a message
         }
     }
 

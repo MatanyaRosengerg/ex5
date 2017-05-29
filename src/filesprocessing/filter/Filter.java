@@ -95,8 +95,7 @@ public abstract class Filter {
      */
     static void checkNumberOfParameters(String[] filterLine, int numberOfParameters) throws Type1Exception{
         if (filterLine.length != numberOfParameters + 1 && filterLine.length != numberOfParameters + 2) {
-            throw new Type1Exception("");
+            throw new Type1Exception();
         }
     }
 }
-

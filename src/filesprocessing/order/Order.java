@@ -2,20 +2,14 @@ package filesprocessing.order;
 
 
 import filesprocessing.exception.Type1Exception;
+import filesprocessing.factories.ComperatorFactory;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public abstract class Order {
+public class Order {
 
-    /** the line of the order sub-section command after being split into by "#" */
-    protected String[] orderParameters;
-
-    /** the parameter that determines if the REVERSE suffix is in the command */
-    protected boolean isReversed;
-
-    /** The user format for using the REVERSE suffix */
-    private static final String REVERSE = "REVERSE";
+    private static int numberOfParameters = 0;
 
     /**
      * Comperator that match the order's type.
@@ -28,23 +22,19 @@ public abstract class Order {
      * @param orderParameters the line of the order sub-section command after being split into by "#"
      * @throws Type1Exception if the command format isn't good
      */
-    Order(String[] orderParameters) throws Type1Exception {
-        this.orderParameters = orderParameters;
-        setCommandParameters(orderParameters);
-        setReversed();
+    public Order(String[] orderParameters) throws Type1Exception {
+        if (orderParameters.length != numberOfParameters + 1 && orderParameters.length != numberOfParameters + 2){
+            throw new Type1Exception();
+        }
+        comperator = ComperatorFactory.getOrderByCommand(orderParameters);
     }
 
     /**
-     * default constructor to avoid exceptions
+     * Construct default order.
      */
-    protected Order() {}
-
-    /**
-     * Convert text to parameters
-     * @param orderLine String[] of parameters' text
-     * @throws Type1Exception Throw Type1 Exception if the parameters are wrong
-     */
-    protected abstract void setCommandParameters(String[] orderLine) throws Type1Exception;
+    public Order(){
+        comperator = new AbsCompare(false);
+    }
 
     /**
      * Orders the files according to wheather or not they match the order command line conditions.
@@ -54,13 +44,5 @@ public abstract class Order {
     public ArrayList<File> doOrder(ArrayList<File> dirFiles){
         dirFiles.sort(comperator);
         return dirFiles;
-    }
-
-    /**
-     * Set the REVERSE command according to the suffix. This is done only after verifying the the format of
-     * the command line is good.
-     */
-    private void setReversed(){
-        this.isReversed = orderParameters[orderParameters.length - 1].equals(REVERSE);
     }
 }

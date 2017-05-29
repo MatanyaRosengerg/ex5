@@ -17,11 +17,11 @@ public class FilesToArrayFactory {
      */
     public static String[] getSourceNames(String sourceDirPath) throws Type2Exception {
         File source = new File(sourceDirPath);
-        if (!source.exists()) {throw new Type2Exception("Source Does Not Exist" + sourceDirPath);}
-        if (!source.isDirectory()) {throw new Type2Exception("Source is Not a Directory");}
+        if (!source.exists()) {throw new Type2Exception();}
+        if (!source.isDirectory()) {throw new Type2Exception();}
 
         File[] sourceFiles = source.listFiles();
-        if (sourceFiles == null) {throw new Type2Exception("Source is Empty");}//TODO
+        if (sourceFiles == null) {throw new Type2Exception();}//TODO
 
         String[] sourceFileNames = new String[sourceFiles.length];
         for (int i = 0; i < sourceFiles.length; i++) {sourceFileNames[i] = sourceFiles[i].getName();}
