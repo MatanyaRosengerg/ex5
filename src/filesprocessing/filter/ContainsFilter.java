@@ -8,7 +8,7 @@ import java.io.File;
 public class ContainsFilter extends Filter {
     private static int numberOfParameters = 1;
 
-    private String fileNameParameter;
+    protected String fileNameParameter;
 
     public ContainsFilter(String[] filterParameters) throws Type1Exception {super(filterParameters);}
 
@@ -19,8 +19,10 @@ public class ContainsFilter extends Filter {
 
     @Override
     protected void setCommandParameters(String[] filterLine) throws Type1Exception {
+        //Todo - why put argument of 'NUM_OF_PARAMS'??
         checkNumberOfParameters(filterLine, numberOfParameters);
         fileNameParameter = filterLine[1];
+        //Todo - what about checking if the 'NOT' suffix is valid??
     }
 
 }

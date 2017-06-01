@@ -5,22 +5,15 @@ import filesprocessing.exception.Type1Exception;
 import java.io.File;
 
 
-public class FileFilter extends Filter {
+public class FileFilter extends ContainsFilter {
     private static int numberOfParameters = 1;
 
-    private String fileNameParameter;
 
     public FileFilter(String[] filterParameters) throws Type1Exception {super(filterParameters);}
 
     @Override
     protected boolean matchesFilter(File toFilter) {
         return toFilter.getName().equals(fileNameParameter);
-    }
-
-    @Override
-    protected void setCommandParameters(String[] filterLine) throws Type1Exception {
-        checkNumberOfParameters(filterLine, numberOfParameters);
-        fileNameParameter = filterLine[1];
     }
 
 }

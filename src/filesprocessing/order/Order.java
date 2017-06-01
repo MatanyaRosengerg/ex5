@@ -27,7 +27,7 @@ public class Order {
             throw new Type1Exception();
         }
         comperator = ComperatorFactory.getOrderByCommand(orderParameters);
-    }
+    }//TODO are you sure that an *empty* line should cause an exception??
 
     /**
      * Construct default order.

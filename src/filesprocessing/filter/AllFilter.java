@@ -17,7 +17,7 @@ public class AllFilter extends Filter {
     public AllFilter() {
         //TODO Check line to throw exeptions
         //throw new Type1Exception("From filterFactory: Not A filter Name in line ");
-        this.isNOTcommand = false;
+        this.hasNOTcommand = false;
     }
 
 
@@ -28,7 +28,7 @@ public class AllFilter extends Filter {
 
     @Override
     protected void setCommandParameters(String[] filterLine) {
-        
+
     }//Todo?
 
 }

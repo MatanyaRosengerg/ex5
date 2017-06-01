@@ -6,7 +6,7 @@ import filesprocessing.exception.Type1Exception;
 import java.io.File;
 
 public class GreaterThanFilter extends Filter {
-    private static int numberOfParameters = 1;
+    private static int NUM_OF_PARAMS = 1; //TODO change names to fit
 
     private double minSize;
 
@@ -19,12 +19,11 @@ public class GreaterThanFilter extends Filter {
 
     @Override
     protected void setCommandParameters(String[] filterLine) throws Type1Exception {
-        checkNumberOfParameters(filterLine, numberOfParameters);
+        checkNumberOfParameters(filterLine, NUM_OF_PARAMS);
         try {
             minSize = Double.parseDouble(filterLine[1]);
-            if (minSize < 0)
-                throw new Type1Exception();
-        }catch (Exception e) {
+            if (minSize < 0) { throw new Type1Exception(); }
+        } catch (Exception e) {
             throw new Type1Exception(); //TODO maybe add a message
         }
     }

@@ -7,20 +7,17 @@ import java.io.File;
 import java.util.ArrayList;
 
 public abstract class Filter {
-    /**
-     * number of valid parameters
-     */
-    private static int numberOfParameters;
+    /** number of valid parameters */
+    private static int numberOfParameters; //TODO - Change all to protected?? No. but do something or delete.
 
     /** the line of the filter sub-section command after being split into by "#" */
     protected String[] filterParameters;
 
     /** the parameter that determines if the NOT suffix is in the command */
-    protected boolean isNOTcommand;
+    protected boolean hasNOTcommand = false;
 
     /** The user format for using the NOT suffix */
     static final String NOT = "NOT";
-    static final String NO = "NO";
 
 
     /**
@@ -40,6 +37,7 @@ public abstract class Filter {
      */
     protected Filter() {}
 
+
     /**
      * This method determines weather a file meets the filter *FULL-command* condition
      *
@@ -50,21 +48,23 @@ public abstract class Filter {
 
     /**
      * Convert text to parameters
+     *
      * @param filterLine String[] of parameters' text
      * @throws Type1Exception Throw Type1 Exception if the parameters are wrong
      */
     protected abstract void setCommandParameters(String[] filterLine) throws Type1Exception;
+    //TODO - no need for arguments filterLine because it's protected
 
     /**
      * Filteres the files according to wheather or not they match the filter command line conditions.
      *
      * @param dirFiles the files to filter (ArrayList<File>)
      */
-    public ArrayList<File> doFilter(ArrayList<File> dirFiles) {//TODO consider making and returning a new list
+    public ArrayList<File> doFilter(ArrayList<File> dirFiles) {
         ArrayList<File> filteredFiles = new ArrayList<>();
         filterDirectories(dirFiles);
         for (File file : dirFiles) {
-            if (!file.isDirectory() && (matchesFilter(file) == !isNOTcommand)) {filteredFiles.add(file);}
+            if (!file.isDirectory() && (matchesFilter(file) == !hasNOTcommand)) {filteredFiles.add(file);}
         }
         return filteredFiles;
     }
@@ -82,20 +82,26 @@ public abstract class Filter {
     /**
      * Set the NOT command according to the suffix. This is done only after verifying the the format of
      * the command line is good.
-     */
-    private void setNOTCommand() {
-        this.isNOTcommand = filterParameters[filterParameters.length - 1].equals(NOT);
+     */ //TODO - make it throw and check the length == numOfParams+2 && suffix == 'NOT'
+    private void setNOTCommand() throws Type1Exception {
+        if (filterParameters.length == numberOfParameters + 2) {
+            String commandSuffix = filterParameters[filterParameters.length - 1];
+            if (!commandSuffix.equals(NOT)) {throw new Type1Exception();}
+            else {this.hasNOTcommand = true;}
+        }//Otherwise, assert that there is no NOT command, and leave it false.
     }
 
     /**
-     * Check if the numbeer of parameters is valid.
-     * @param filterLine The parameters as String array
+     * Check if the number of parameters is valid.
+     *
+     * @param filterLine         The parameters as String array
      * @param numberOfParameters Valid number of parameters.
      * @throws Type1Exception Throw Exception if invalid
      */
-    static void checkNumberOfParameters(String[] filterLine, int numberOfParameters) throws Type1Exception{
+    static void checkNumberOfParameters(String[] filterLine, int numberOfParameters) throws Type1Exception {
         if (filterLine.length != numberOfParameters + 1 && filterLine.length != numberOfParameters + 2) {
             throw new Type1Exception();
         }
     }
+
 }

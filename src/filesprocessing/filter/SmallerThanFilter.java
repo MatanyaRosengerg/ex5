@@ -17,14 +17,13 @@ public class SmallerThanFilter extends Filter {
         return toFilter.length() <= maxSize;
     }
 
-    @Override
+    @Override //TODO - Take care of duplicates!!!!!!!!!!!!!!
     protected void setCommandParameters(String[] filterLine) throws Type1Exception {
         checkNumberOfParameters(filterLine, numberOfParameters);
         try {
             maxSize = Double.parseDouble(filterLine[1]);
-            if (maxSize < 0)
-                throw new Type1Exception();
-        }catch (Exception e) {
+            if (maxSize < 0) { throw new Type1Exception(); }
+        } catch (Exception e) {
             throw new Type1Exception(); //TODO maybe add a message
         }
     }
