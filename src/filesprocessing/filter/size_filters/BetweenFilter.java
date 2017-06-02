@@ -6,7 +6,7 @@ import filesprocessing.filter.Filter;
 
 import java.io.File;
 
-public class BetweenFilter extends Filter {
+public class BetweenFilter extends SizeFilter {
 
     /** the number of arguments that the filter takes */
     private static int NUM_OF_PARAMS = 2;
@@ -20,8 +20,7 @@ public class BetweenFilter extends Filter {
 
 
     public BetweenFilter(String[] filterParameters) throws Type1Exception {
-        super(filterParameters,
-                NUM_OF_PARAMS);
+        super(filterParameters, NUM_OF_PARAMS);
     }
 
     @Override
@@ -31,15 +30,9 @@ public class BetweenFilter extends Filter {
 
     @Override
     protected void setCommandParameters() throws Type1Exception {
-        try {
-            minSize = Double.parseDouble(filterParameters[MIN_SIZE_IDX]);
-            maxSize = Double.parseDouble(filterParameters[MAX_SIZE_IDX]);
-            if (minSize < 0 || maxSize < 0 || minSize > maxSize) {
-                throw new Type1Exception();
-            }
-        } catch (Exception e) {
-            throw new Type1Exception();
-        }
+        minSize = getParameter(MIN_SIZE_IDX);
+        maxSize = getParameter(MAX_SIZE_IDX);
+        if (minSize > maxSize) {throw new Type1Exception();}
     }
 
 }

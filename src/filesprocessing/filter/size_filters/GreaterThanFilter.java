@@ -6,7 +6,7 @@ import filesprocessing.filter.Filter;
 
 import java.io.File;
 
-public class GreaterThanFilter extends Filter {
+public class GreaterThanFilter extends SizeFilter {
 
     /** the number of arguments that the filter takes */
     private static int NUM_OF_PARAMS = 1;
@@ -19,23 +19,15 @@ public class GreaterThanFilter extends Filter {
 
 
     public GreaterThanFilter(String[] filterParameters) throws Type1Exception {
-        super(filterParameters,
-                NUM_OF_PARAMS);
+        super(filterParameters, NUM_OF_PARAMS);
     }
 
     @Override
     protected boolean matchesFilter(File toFilter) {
-        return toFilter.length() >= minSize;
+        return toFilter.length() > minSize;
     }
 
     @Override
-    protected void setCommandParameters() throws Type1Exception {
-        try {
-            minSize = Double.parseDouble(filterParameters[MIN_SIZE_IDX]);
-            if (minSize < 0) { throw new Type1Exception(); }
-        } catch (Exception e) {
-            throw new Type1Exception();
-        }
-    }
+    protected void setCommandParameters() throws Type1Exception {minSize = getParameter(MIN_SIZE_IDX);}
 
 }
