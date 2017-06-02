@@ -4,6 +4,9 @@ package filesprocessing.factories;
 import filesprocessing.CommandSection;
 import filesprocessing.exception.Type1Exception;
 import filesprocessing.filter.*;
+import filesprocessing.filter.contain_string_filters.*;
+import filesprocessing.filter.property_filters.*;
+import filesprocessing.filter.size_filters.*;
 
 public class FilterFactory {
 
@@ -21,55 +24,52 @@ public class FilterFactory {
     private static final String HIDDEN = "hidden";
     private static final String ALL = "all";
 
+    /** incorrect filter name error message*/
+    private static final String WRONG_FILTER_NAME_MESSAGE = "no such filter exists";
 
     public static Filter getFilterByCommand(String[] filterParameters) throws Type1Exception {
 
         String filterName = filterParameters[CommandSection.FILTER_NAME_IDX];
 
         Filter filter;
-        try {
-            switch (filterName) {
-                case GREATER_THAN:
-                    filter = new GreaterThanFilter(filterParameters);
-                    break;
-                case SMALLER_THAN:
-                    filter = new SmallerThanFilter(filterParameters);
-                    break;
-                case BETWEEN:
-                    filter = new BetweenFilter(filterParameters);
-                    break;
-                case FILE:
-                    filter = new FileFilter(filterParameters);
-                    break;
-                case CONTAINS:
-                    filter = new ContainsFilter(filterParameters);
-                    break;
-                case PREFIX:
-                    filter = new PrefixFilter(filterParameters);
-                    break;
-                case SUFFIX:
-                    filter = new SuffixFilter(filterParameters);
-                    break;
-                case WRITABLE:
-                    filter = new WritableFilter(filterParameters);
-                    break;
-                case EXECUTABLE:
-                    filter = new ExecutableFilter(filterParameters);
-                    break;
-                case HIDDEN:
-                    filter = new HiddenFilter(filterParameters);
-                    break;
-                case ALL:
-                    filter = new AllFilter(filterParameters);
-                    break;
-                default:
-                    throw new Type1Exception();
-            }
-            return filter;
-
-        } catch (Type1Exception ignored) {
-            throw new Type1Exception();
+        switch (filterName) {
+            case GREATER_THAN:
+                filter = new GreaterThanFilter(filterParameters);
+                break;
+            case SMALLER_THAN:
+                filter = new SmallerThanFilter(filterParameters);
+                break;
+            case BETWEEN:
+                filter = new BetweenFilter(filterParameters);
+                break;
+            case FILE:
+                filter = new FileFilter(filterParameters);
+                break;
+            case CONTAINS:
+                filter = new ContainsFilter(filterParameters);
+                break;
+            case PREFIX:
+                filter = new PrefixFilter(filterParameters);
+                break;
+            case SUFFIX:
+                filter = new SuffixFilter(filterParameters);
+                break;
+            case WRITABLE:
+                filter = new WritableFilter(filterParameters);
+                break;
+            case EXECUTABLE:
+                filter = new ExecutableFilter(filterParameters);
+                break;
+            case HIDDEN:
+                filter = new HiddenFilter(filterParameters);
+                break;
+            case ALL:
+                filter = new AllFilter(filterParameters);
+                break;
+            default:
+                throw new Type1Exception(WRONG_FILTER_NAME_MESSAGE);
         }
+        return filter;
     }
 
 

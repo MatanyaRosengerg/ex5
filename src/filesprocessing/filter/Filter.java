@@ -8,34 +8,42 @@ import java.util.ArrayList;
 
 public abstract class Filter {
     /** number of valid parameters */
-    private static int numberOfParameters; //TODO - Change all to protected?? No. but do something or delete.
+    private final int numOfParams;
 
     /** the line of the filter sub-section command after being split into by "#" */
     protected String[] filterParameters;
 
     /** the parameter that determines if the NOT suffix is in the command */
-    protected boolean hasNOTcommand = false;
+    boolean hasNOTcommand = false;
 
     /** The user format for using the NOT suffix */
-    static final String NOT = "NOT";
+    private static final String NOT = "NOT";
+
+    /** Error messages */
+    private final String PARAM_NUM_ERROR_MESSAGE = "incorrect number of FILTER parameters";
+    private final String NOT_ERROR_MESSAGE = PARAM_NUM_ERROR_MESSAGE + ", or incorrect usage of 'NOT'";
 
 
     /**
      * Constructs the filter, verifies the parameters, and sets the command prameters for the filter.
      *
      * @param filterParameters the line of the filter sub-section command after being split into by "#"
+     * @param numOfParams      - the number of parameters that the filter needs (not including the filter
+     *                         name and the suffix 'NOT')
      * @throws Type1Exception if the command format isn't good
      */
-    Filter(String[] filterParameters) throws Type1Exception {
+    protected Filter(String[] filterParameters, int numOfParams) throws Type1Exception {
+        this.numOfParams = numOfParams;
         this.filterParameters = filterParameters;
-        setCommandParameters(filterParameters);
+        checkNumberOfParameters();
+        setCommandParameters(); //assert that the number of parameters fits (no IndexOutOfBoundsException)
         setNOTCommand();
     }
 
     /**
      * default constructor to avoid exceptions
      */
-    protected Filter() {}
+    protected Filter() {this.numOfParams = 0;}
 
 
     /**
@@ -49,11 +57,10 @@ public abstract class Filter {
     /**
      * Convert text to parameters
      *
-     * @param filterLine String[] of parameters' text
      * @throws Type1Exception Throw Type1 Exception if the parameters are wrong
      */
-    protected abstract void setCommandParameters(String[] filterLine) throws Type1Exception;
-    //TODO - no need for arguments filterLine because it's protected
+    protected abstract void setCommandParameters() throws Type1Exception;
+
 
     /**
      * Filteres the files according to wheather or not they match the filter command line conditions.
@@ -84,9 +91,11 @@ public abstract class Filter {
      * the command line is good.
      */ //TODO - make it throw and check the length == numOfParams+2 && suffix == 'NOT'
     private void setNOTCommand() throws Type1Exception {
-        if (filterParameters.length == numberOfParameters + 2) {
+        if (filterParameters.length == numOfParams + 2) {
             String commandSuffix = filterParameters[filterParameters.length - 1];
-            if (!commandSuffix.equals(NOT)) {throw new Type1Exception();}
+            if (!commandSuffix.equals(NOT)) {
+                throw new Type1Exception(NOT_ERROR_MESSAGE);
+            }
             else {this.hasNOTcommand = true;}
         }//Otherwise, assert that there is no NOT command, and leave it false.
     }
@@ -94,13 +103,11 @@ public abstract class Filter {
     /**
      * Check if the number of parameters is valid.
      *
-     * @param filterLine         The parameters as String array
-     * @param numberOfParameters Valid number of parameters.
      * @throws Type1Exception Throw Exception if invalid
      */
-    static void checkNumberOfParameters(String[] filterLine, int numberOfParameters) throws Type1Exception {
-        if (filterLine.length != numberOfParameters + 1 && filterLine.length != numberOfParameters + 2) {
-            throw new Type1Exception();
+    private void checkNumberOfParameters() throws Type1Exception {
+        if (filterParameters.length != numOfParams + 1 && filterParameters.length != numOfParams + 2) {
+            throw new Type1Exception(PARAM_NUM_ERROR_MESSAGE);
         }
     }
 

@@ -31,6 +31,7 @@ public class CommandSection {
     public static final int ORDER__SUB_IDX = 3;
 
     public static final int FILTER_NAME_IDX = 0;
+    public static final int ORDER_NAME_IDX = 0;
 
     private String[] filterParameters;
     private String[] orderParameters;
@@ -46,7 +47,7 @@ public class CommandSection {
      * @param stringSegment Array of the lines of the command segment from the commands file
      * @param headLineIndex The line number of the first line  in the commands file
      * @throws Type2Exception throws if the segments is not properly formatted (no FILTER or ORDER
-     *                            headlines)
+     *                        headlines)
      */
     public CommandSection(String[] stringSegment, int headLineIndex) throws Type2Exception {
         this.headLineIndex = headLineIndex;
@@ -64,10 +65,10 @@ public class CommandSection {
      */
     private void checkSegmentFormatErrors(String[] commandSegment) throws Type2Exception {
         if (!commandSegment[FILTER_IDX].equals(FILTER)) {
-            throw new Type2Exception();
+            throw new Type2Exception(errorMessage(MISSING_FILTER,headLineIndex+FILTER_IDX));
         }
         if (!commandSegment[ORDER_IDX].equals(ORDER)) {
-            throw new Type2Exception();
+            throw new Type2Exception(errorMessage(MISSING_ORDER,headLineIndex+ORDER_IDX));
         }
     }
 
@@ -76,7 +77,7 @@ public class CommandSection {
      *
      * @param directory The directory to sort and print its files
      */
-    public void doCommand(File directory) throws Type2Exception {
+    void doCommand(File directory) throws Type2Exception {
 
         try {
             filter = FilterFactory.getFilterByCommand(filterParameters);
@@ -94,12 +95,14 @@ public class CommandSection {
 
         ArrayList<File> filteredDirectory = new ArrayList<>();
         File[] files = directory.listFiles();
-        if (files == null)
-            throw new Type2Exception();
+        if (files == null) {
+            throw new Type2Exception("NO FILES IN DIRECTORY"); //TODO - DFUK!! Type2Exception were supposed to
+        }
+        // be already caught!!
         Collections.addAll(filteredDirectory, files);
         filteredDirectory = filter.doFilter(filteredDirectory);
         filteredDirectory = order.doOrder(filteredDirectory);
-        for(File file: filteredDirectory){System.out.println(file.getName());}
+        for (File file : filteredDirectory) {System.out.println(file.getName());}
 
     }
 
@@ -111,7 +114,7 @@ public class CommandSection {
      * @return A formatted String of an error for the stderr.
      */
     private static String errorMessage(String errorMessage, int lineNum) {
-        return (errorMessage + lineNum + "\n");//TODO make it in a new exception class!!?
+        return (errorMessage + lineNum );
     }
 
     /**
@@ -121,7 +124,7 @@ public class CommandSection {
      * @param lineNum   the line in which the exception occurred
      */
     private static void printWarningMessage(Type1Exception exception, int lineNum) {
-        System.err.println("Warning in line " + lineNum);
+        System.err.println("Warning in line " + lineNum + ": " + exception.getMessage());
     }
 
     /**

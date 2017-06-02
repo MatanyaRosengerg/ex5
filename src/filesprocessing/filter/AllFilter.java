@@ -6,10 +6,10 @@ import java.io.File;
 
 
 public class AllFilter extends Filter {
-
+    private static int NUM_OF_PARAMS = 0;
 
     public AllFilter(String[] filterParameters) throws Type1Exception {
-        super(filterParameters);
+        super(filterParameters, NUM_OF_PARAMS);
 
     }
     //TODO check null validity in AllFilter
@@ -27,7 +27,7 @@ public class AllFilter extends Filter {
     }
 
     @Override
-    protected void setCommandParameters(String[] filterLine) {
+    protected void setCommandParameters() {
 
     }//Todo?
 

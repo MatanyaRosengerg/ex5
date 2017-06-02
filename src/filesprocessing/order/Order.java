@@ -2,19 +2,23 @@ package filesprocessing.order;
 
 
 import filesprocessing.exception.Type1Exception;
-import filesprocessing.factories.ComperatorFactory;
+import filesprocessing.factories.FileComparatorFactory;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class Order {
 
-    private static int numberOfParameters = 0;
+    public static int MAX_PARAMS_NUM = 2;
 
-    /**
-     * Comperator that match the order's type.
-     */
-    Comperator comperator;
+    /** Error messages */
+    private static final String PARAM_NUM_ERROR_MESSAGE = "incorrect number of ORDER parameters";
+    public static final String REVERSE_ERROR_MESSAGE = PARAM_NUM_ERROR_MESSAGE + ", or incorrect usage of " +
+            "'REVERSE'";
+
+
+    /** FileComparator that match the order's type. */
+    private FileComparator fileComparator;
 
     /**
      * Constructs the order, verifies the parameters, and sets the command parameters for the order command.
@@ -23,26 +27,27 @@ public class Order {
      * @throws Type1Exception if the command format isn't good
      */
     public Order(String[] orderParameters) throws Type1Exception {
-        if (orderParameters.length != numberOfParameters + 1 && orderParameters.length != numberOfParameters + 2){
-            throw new Type1Exception();
+        if (orderParameters.length > MAX_PARAMS_NUM) {
+            throw new Type1Exception(PARAM_NUM_ERROR_MESSAGE);
         }
-        comperator = ComperatorFactory.getOrderByCommand(orderParameters);
-    }//TODO are you sure that an *empty* line should cause an exception??
+        fileComparator = FileComparatorFactory.getOrderByCommand(orderParameters);
+    }
+
 
     /**
      * Construct default order.
      */
-    public Order(){
-        comperator = new AbsCompare(false);
+    public Order() {
+        fileComparator = new AbsCompare(false);
     }
 
     /**
-     * Orders the files according to wheather or not they match the order command line conditions.
+     * Orders the files according to the fileComparator.
      *
      * @param dirFiles the files to order (ArrayList<File>)
      */
-    public ArrayList<File> doOrder(ArrayList<File> dirFiles){
-        dirFiles.sort(comperator);
+    public ArrayList<File> doOrder(ArrayList<File> dirFiles) {
+        dirFiles.sort(fileComparator);
         return dirFiles;
     }
 }

@@ -3,10 +3,10 @@ package filesprocessing.order;
 import java.io.File;
 import java.util.regex.Pattern;
 
-/**
- * Created by t8307673 on 28/05/2017.
- */
-public class TypeCompare extends Comperator {
+
+public class TypeCompare extends FileComparator {
+    private static final String SPLIT_DOT = ".";
+    private static final String NO_TYPE = "";
 
     public TypeCompare(boolean isReversed) {
         super(isReversed);
@@ -17,10 +17,10 @@ public class TypeCompare extends Comperator {
         return isReversed * getType(file1).compareTo(getType(file2));
     }
 
-    private String getType(File file){
-        String[] split = file.getName().split(Pattern.quote("."));
-        if (split.length == 1){
-            return "";
+    private String getType(File file) {
+        String[] split = file.getName().split(Pattern.quote(SPLIT_DOT));
+        if (split.length == 1) {
+            return NO_TYPE;
         }
         return split[split.length - 1];
     }

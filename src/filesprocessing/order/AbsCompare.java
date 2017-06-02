@@ -1,12 +1,9 @@
 package filesprocessing.order;
 
 import java.io.File;
-import java.util.Comparator;
 
-/**
- * Created by t8307673 on 28/05/2017.
- */
-public class AbsCompare extends Comperator {
+
+public class AbsCompare extends FileComparator {
 
     public AbsCompare(boolean isReversed) {
         super(isReversed);

@@ -2,10 +2,8 @@ package filesprocessing.order;
 
 import java.io.File;
 
-/**
- * Created by t8307673 on 28/05/2017.
- */
-public class SizeCompare extends Comperator {
+
+public class SizeCompare extends FileComparator {
 
 
     public SizeCompare(boolean isReversed) {

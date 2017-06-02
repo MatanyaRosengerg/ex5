@@ -36,6 +36,7 @@ public class CommandSectionFactory {
                 i--; //Start next section from the "FILTER" line
             }
 
+            //@throws Type2Exception.
             allSections.add(new CommandSection(currentSection, headLineIdx));
             i = i + CommandSection.SECTION_LENGTH;
         }

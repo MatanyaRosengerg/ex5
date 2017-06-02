@@ -1,4 +1,4 @@
-package filesprocessing.filter;
+package filesprocessing.filter.property_filters;
 
 
 import filesprocessing.exception.Type1Exception;

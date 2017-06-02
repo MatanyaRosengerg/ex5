@@ -1,4 +1,4 @@
-package filesprocessing.filter;
+package filesprocessing.filter.contain_string_filters;
 
 import filesprocessing.exception.Type1Exception;
 
@@ -6,8 +6,6 @@ import java.io.File;
 
 
 public class FileFilter extends ContainsFilter {
-    private static int numberOfParameters = 1;
-
 
     public FileFilter(String[] filterParameters) throws Type1Exception {super(filterParameters);}
 

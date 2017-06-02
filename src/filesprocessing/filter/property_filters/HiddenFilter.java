@@ -1,12 +1,14 @@
-package filesprocessing.filter;
+package filesprocessing.filter.property_filters;
 
 
 import filesprocessing.exception.Type1Exception;
 
 import java.io.File;
 
+
 public class HiddenFilter extends PropertyFilter {
-    public HiddenFilter(String[] filterLine) throws Type1Exception {super(filterLine);}
+
+    public HiddenFilter(String[] filterParameters) throws Type1Exception {super(filterParameters);}
 
     @Override
     protected boolean matchesSubFilter(File toFilter) {return toFilter.isHidden();}
