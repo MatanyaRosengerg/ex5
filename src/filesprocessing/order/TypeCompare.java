@@ -13,9 +13,10 @@ public class TypeCompare extends FileComparator {
     }
 
     @Override
-    public int compare(File file1, File file2) {
+    protected int subCompare(File file1, File file2) {
         return isReversed * getType(file1).compareTo(getType(file2));
     }
+
 
     private String getType(File file) {
         String[] split = file.getName().split(Pattern.quote(SPLIT_DOT));

@@ -18,10 +18,6 @@ public class SmallerThanFilter extends Filter {
     private static final int MAX_SIZE_IDX = 1;
 
 
-    /** Error message for incorrect usage of filter */
-    private final String ARGUMENT_USAGE_ERROR_MESSAGE = "the filter parameter should be positive";
-    private final String ARGUMENTS_ERROR_MESSAGE = "error in the filter argument";
-
     public SmallerThanFilter(String[] filterParameters) throws Type1Exception {
         super(filterParameters,
                 NUM_OF_PARAMS);
@@ -36,9 +32,9 @@ public class SmallerThanFilter extends Filter {
     protected void setCommandParameters() throws Type1Exception {
         try {
             maxSize = Double.parseDouble(filterParameters[MAX_SIZE_IDX]);
-            if (maxSize < 0) { throw new Type1Exception(ARGUMENT_USAGE_ERROR_MESSAGE); }
+            if (maxSize < 0) { throw new Type1Exception(); }
         } catch (Exception e) {
-            throw new Type1Exception(ARGUMENTS_ERROR_MESSAGE);
+            throw new Type1Exception();
         }
     }
 

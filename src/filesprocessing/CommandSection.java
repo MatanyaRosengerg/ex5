@@ -82,14 +82,14 @@ public class CommandSection {
         try {
             filter = FilterFactory.getFilterByCommand(filterParameters);
         } catch (Type1Exception e) {
-            printWarningMessage(e, headLineIndex + FILTER__SUB_IDX);
+            printWarningMessage(headLineIndex + FILTER__SUB_IDX);
             filter = new AllFilter();
         }
 
         try {
             order = new Order(orderParameters);
         } catch (Type1Exception e) {
-            printWarningMessage(e, headLineIndex + ORDER__SUB_IDX);
+            printWarningMessage(headLineIndex + ORDER__SUB_IDX);
             order = new Order();
         }
 
@@ -120,11 +120,10 @@ public class CommandSection {
     /**
      * Prints an error message the stdeer with an indication for the line number in which the error occurred
      *
-     * @param exception the thrown exception
      * @param lineNum   the line in which the exception occurred
      */
-    private static void printWarningMessage(Type1Exception exception, int lineNum) {
-        System.err.println("Warning in line " + lineNum + ": " + exception.getMessage());
+    private static void printWarningMessage(int lineNum) {
+        System.err.println("Warning in line " + lineNum);
     }
 
     /**

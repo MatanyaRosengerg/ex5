@@ -21,9 +21,6 @@ public abstract class PropertyFilter extends Filter {
     /** determines if the filter argument is "YES" or "NO" */
     private boolean yesCondition;
 
-    /** Error message for incorrect usage of filter */
-    private final String PARAMETER_ERROR_MESSAGE = "the filter parameter should be 'YES' or 'NO'";
-
 
     PropertyFilter(String[] filterParameters) throws Type1Exception {super(filterParameters, NUM_OF_PARAMS); }
 
@@ -42,7 +39,7 @@ public abstract class PropertyFilter extends Filter {
     @Override
     protected void setCommandParameters() throws Type1Exception {
         if (!(filterParameters[CONDITION_IDX].equals(NO) || filterParameters[CONDITION_IDX].equals(YES))) {
-            throw new Type1Exception(PARAMETER_ERROR_MESSAGE);
+            throw new Type1Exception();
         }
         else {setCondition();}
     }

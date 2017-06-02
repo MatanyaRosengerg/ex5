@@ -10,8 +10,8 @@ public class AbsCompare extends FileComparator {
     }
 
     @Override
-    public int compare(File file1, File file2) {
-        return isReversed * file1.getAbsolutePath().compareTo(file2.getAbsolutePath());
+    protected int subCompare(File file1, File file2) {
+        return defaultCompare(file1, file2);
     }
 
 }

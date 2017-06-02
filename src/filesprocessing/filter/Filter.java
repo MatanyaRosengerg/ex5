@@ -19,10 +19,6 @@ public abstract class Filter {
     /** The user format for using the NOT suffix */
     private static final String NOT = "NOT";
 
-    /** Error messages */
-    private final String PARAM_NUM_ERROR_MESSAGE = "incorrect number of FILTER parameters";
-    private final String NOT_ERROR_MESSAGE = PARAM_NUM_ERROR_MESSAGE + ", or incorrect usage of 'NOT'";
-
 
     /**
      * Constructs the filter, verifies the parameters, and sets the command prameters for the filter.
@@ -94,7 +90,7 @@ public abstract class Filter {
         if (filterParameters.length == numOfParams + 2) {
             String commandSuffix = filterParameters[filterParameters.length - 1];
             if (!commandSuffix.equals(NOT)) {
-                throw new Type1Exception(NOT_ERROR_MESSAGE);
+                throw new Type1Exception();
             }
             else {this.hasNOTcommand = true;}
         }//Otherwise, assert that there is no NOT command, and leave it false.
@@ -107,7 +103,7 @@ public abstract class Filter {
      */
     private void checkNumberOfParameters() throws Type1Exception {
         if (filterParameters.length != numOfParams + 1 && filterParameters.length != numOfParams + 2) {
-            throw new Type1Exception(PARAM_NUM_ERROR_MESSAGE);
+            throw new Type1Exception();
         }
     }
 

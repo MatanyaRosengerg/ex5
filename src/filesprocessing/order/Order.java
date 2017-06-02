@@ -11,11 +11,6 @@ public class Order {
 
     public static int MAX_PARAMS_NUM = 2;
 
-    /** Error messages */
-    private static final String PARAM_NUM_ERROR_MESSAGE = "incorrect number of ORDER parameters";
-    public static final String REVERSE_ERROR_MESSAGE = PARAM_NUM_ERROR_MESSAGE + ", or incorrect usage of " +
-            "'REVERSE'";
-
 
     /** FileComparator that match the order's type. */
     private FileComparator fileComparator;
@@ -28,7 +23,7 @@ public class Order {
      */
     public Order(String[] orderParameters) throws Type1Exception {
         if (orderParameters.length > MAX_PARAMS_NUM) {
-            throw new Type1Exception(PARAM_NUM_ERROR_MESSAGE);
+            throw new Type1Exception();
         }
         fileComparator = FileComparatorFactory.getOrderByCommand(orderParameters);
     }

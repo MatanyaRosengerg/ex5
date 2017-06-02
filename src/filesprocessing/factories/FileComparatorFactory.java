@@ -14,8 +14,6 @@ public class FileComparatorFactory {
     private static final String SIZE = "size";
     private static final String EMPTY = CommandSection.EMPTY;
 
-    /** incorrect filter name error message*/
-    private static final String WRONG_ORDER_NAME_MESSAGE = "no such order exists";
 
     /** The user format for using the REVERSE suffix */
     private static final String REVERSE = "REVERSE";
@@ -43,7 +41,7 @@ public class FileComparatorFactory {
                 fileComparator = new AbsCompare(isReversed);
                 break;
             default:
-                throw new Type1Exception(WRONG_ORDER_NAME_MESSAGE);
+                throw new Type1Exception();
         }
         return fileComparator;
     }
@@ -60,7 +58,7 @@ public class FileComparatorFactory {
     private static boolean isReversed(String[] orderParameters) throws Type1Exception {
         if (orderParameters.length == Order.MAX_PARAMS_NUM) {
             if (!orderParameters[orderParameters.length - 1].equals(REVERSE)) {
-                throw new Type1Exception(Order.REVERSE_ERROR_MESSAGE);
+                throw new Type1Exception();
             }
             else {return true;}
         }

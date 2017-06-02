@@ -24,8 +24,6 @@ public class FilterFactory {
     private static final String HIDDEN = "hidden";
     private static final String ALL = "all";
 
-    /** incorrect filter name error message*/
-    private static final String WRONG_FILTER_NAME_MESSAGE = "no such filter exists";
 
     public static Filter getFilterByCommand(String[] filterParameters) throws Type1Exception {
 
@@ -67,7 +65,7 @@ public class FilterFactory {
                 filter = new AllFilter(filterParameters);
                 break;
             default:
-                throw new Type1Exception(WRONG_FILTER_NAME_MESSAGE);
+                throw new Type1Exception();
         }
         return filter;
     }

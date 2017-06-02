@@ -18,12 +18,11 @@ public class BetweenFilter extends Filter {
     private static final int MIN_SIZE_IDX = 1;
     private static final int MAX_SIZE_IDX = 2;
 
-    /** Error message for incorrect usage of filter */
-    private final String ARGUMENTS_USAGE_ERROR_MESSAGE = "filter parameters should be positive, in ascending order";
-    private final String ARGUMENTS_ERROR_MESSAGE = "error in the filter arguments";
 
-    public BetweenFilter(String[] filterParameters) throws Type1Exception {super(filterParameters,
-            NUM_OF_PARAMS);}
+    public BetweenFilter(String[] filterParameters) throws Type1Exception {
+        super(filterParameters,
+                NUM_OF_PARAMS);
+    }
 
     @Override
     protected boolean matchesFilter(File toFilter) {
@@ -36,10 +35,10 @@ public class BetweenFilter extends Filter {
             minSize = Double.parseDouble(filterParameters[MIN_SIZE_IDX]);
             maxSize = Double.parseDouble(filterParameters[MAX_SIZE_IDX]);
             if (minSize < 0 || maxSize < 0 || minSize > maxSize) {
-                throw new Type1Exception(ARGUMENTS_USAGE_ERROR_MESSAGE);
+                throw new Type1Exception();
             }
         } catch (Exception e) {
-            throw new Type1Exception(ARGUMENTS_ERROR_MESSAGE);
+            throw new Type1Exception();
         }
     }
 
