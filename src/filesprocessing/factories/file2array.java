@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//TODO - catch the exceptions and handle them. Ask permission to copy code from oop staff...!!
+//TODO - Document class
 public class file2array {
 
         /**

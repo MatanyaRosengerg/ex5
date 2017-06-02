@@ -10,9 +10,12 @@ import java.util.ArrayList;
 
 
 public class DirectoryProcessor {
+
+    private static final String ARGS_NUM_ERROR = "number of arguments must be 2";
+
     public static void main(String[] args) {
         try {
-            analyzeFileErrors(args); //Todo expand to do all
+            analyzeArgs(args); //Todo expand to do all
             String[] commandLines = FilesToArrayFactory.getCommandLines(args[1]);
             ArrayList<CommandSection> commandSections = CommandSectionFactory.sectionCommands(commandLines);
             executeAll(commandSections, new File(args[0]));
@@ -22,9 +25,9 @@ public class DirectoryProcessor {
         }
     }
 
-    private static void analyzeFileErrors(String[] args) throws Type2Exception {
+    private static void analyzeArgs(String[] args) throws Type2Exception {
         if (args.length != 2) {
-            throw new Type2Exception("number of arguments must be 2");//todo - magic
+            throw new Type2Exception(ARGS_NUM_ERROR);
         }
 
     }

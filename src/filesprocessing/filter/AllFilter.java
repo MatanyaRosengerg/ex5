@@ -12,13 +12,9 @@ public class AllFilter extends Filter {
         super(filterParameters, NUM_OF_PARAMS);
 
     }
-    //TODO check null validity in AllFilter
 
-    public AllFilter() {
-        //TODO Check line to throw exeptions
-        //throw new Type1Exception("From filterFactory: Not A filter Name in line ");
-        this.hasNOTcommand = false;
-    }
+    /** default construction of filter, that does't throw exceptions */
+    public AllFilter() {this.hasNOTcommand = false;}
 
 
     @Override
@@ -27,8 +23,6 @@ public class AllFilter extends Filter {
     }
 
     @Override
-    protected void setCommandParameters() {
-
-    }//Todo?
+    protected void setCommandParameters() {}
 
 }

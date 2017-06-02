@@ -8,6 +8,7 @@ import filesprocessing.filter.contain_string_filters.*;
 import filesprocessing.filter.property_filters.*;
 import filesprocessing.filter.size_filters.*;
 
+//TODO - document class
 public class FilterFactory {
 
 

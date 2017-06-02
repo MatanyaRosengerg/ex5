@@ -5,6 +5,7 @@ import filesprocessing.CommandSection;
 import filesprocessing.exception.Type1Exception;
 import filesprocessing.order.*;
 
+//TODO - document class
 public class FileComparatorFactory {
 
 

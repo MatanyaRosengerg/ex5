@@ -65,10 +65,10 @@ public class CommandSection {
      */
     private void checkSegmentFormatErrors(String[] commandSegment) throws Type2Exception {
         if (!commandSegment[FILTER_IDX].equals(FILTER)) {
-            throw new Type2Exception(errorMessage(MISSING_FILTER,headLineIndex+FILTER_IDX));
+            throw new Type2Exception(errorMessage(MISSING_FILTER, headLineIndex + FILTER_IDX));
         }
         if (!commandSegment[ORDER_IDX].equals(ORDER)) {
-            throw new Type2Exception(errorMessage(MISSING_ORDER,headLineIndex+ORDER_IDX));
+            throw new Type2Exception(errorMessage(MISSING_ORDER, headLineIndex + ORDER_IDX));
         }
     }
 
@@ -96,12 +96,14 @@ public class CommandSection {
         ArrayList<File> filteredDirectory = new ArrayList<>();
         File[] files = directory.listFiles();
         if (files == null) {
-            throw new Type2Exception("NO FILES IN DIRECTORY"); //TODO - DFUK!! Type2Exception were supposed to
+            throw new Type2Exception("NO FILES IN DIRECTORY");
+            //TODO - DFUK!! Type2Exception were supposed to be already caught!!
         }
-        // be already caught!!
+
         Collections.addAll(filteredDirectory, files);
         filteredDirectory = filter.doFilter(filteredDirectory);
         filteredDirectory = order.doOrder(filteredDirectory);
+        // Print files
         for (File file : filteredDirectory) {System.out.println(file.getName());}
 
     }
@@ -114,13 +116,13 @@ public class CommandSection {
      * @return A formatted String of an error for the stderr.
      */
     private static String errorMessage(String errorMessage, int lineNum) {
-        return (errorMessage + lineNum );
+        return (errorMessage + lineNum);
     }
 
     /**
      * Prints an error message the stdeer with an indication for the line number in which the error occurred
      *
-     * @param lineNum   the line in which the exception occurred
+     * @param lineNum the line in which the exception occurred
      */
     private static void printWarningMessage(int lineNum) {
         System.err.println("Warning in line " + lineNum);

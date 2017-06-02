@@ -8,8 +8,10 @@ import java.io.File;
 
 public abstract class SizeFilter extends Filter {
 
+    /** Conversion ratio between bytes and k-bytes */
     public static final int BYTE_TO_KB = 1024;
 
+    /** Delegates construction to Filter */
     protected SizeFilter(String[] filterParameters, int numOfParams) throws Type1Exception {
         super(filterParameters, numOfParams);
     }

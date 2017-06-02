@@ -1,6 +1,7 @@
 package filesprocessing.factories;
 
 //TODO - merge with file2array
+//TODO - document class
 public class FilesToArrayFactory {
 
 
