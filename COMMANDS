@@ -1,8 +1,12 @@
 FILTER
-greater_than#0.5#NOT
+prefix#a
 ORDER
 abs
 FILTER
-greater_than1#0.5
+suffix#.a
 ORDER
-abs
+type
+FILTER
+writable#YES
+ORDER
+mod

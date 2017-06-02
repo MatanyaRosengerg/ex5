@@ -65,22 +65,12 @@ public abstract class Filter {
      */
     public ArrayList<File> doFilter(ArrayList<File> dirFiles) {
         ArrayList<File> filteredFiles = new ArrayList<>();
-        filterDirectories(dirFiles);
         for (File file : dirFiles) {
             if (!file.isDirectory() && (matchesFilter(file) == !hasNOTcommand)) {filteredFiles.add(file);}
         }
         return filteredFiles;
     }
 
-    /**
-     * Initial filter to remove all directories and leave only files in the directory.
-     *
-     * @param directoryFiles the files and directories in the directory
-     * @throws NullPointerException //TODO check the case of empty directory!!
-     */
-    private void filterDirectories(ArrayList<File> directoryFiles) throws NullPointerException {
-        for (File file : directoryFiles) {if (file.isDirectory()) {directoryFiles.remove(file);}}
-    }
 
     /**
      * Set the NOT command according to the suffix. This is done only after verifying the the format of
