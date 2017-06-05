@@ -8,7 +8,6 @@ import filesprocessing.filter.contain_string_filters.*;
 import filesprocessing.filter.property_filters.*;
 import filesprocessing.filter.size_filters.*;
 
-//TODO - document class
 public class FilterFactory {
 
 
@@ -31,44 +30,49 @@ public class FilterFactory {
         String filterName = filterParameters[CommandSection.FILTER_NAME_IDX];
 
         Filter filter;
-        switch (filterName) {
-            case GREATER_THAN:
-                filter = new GreaterThanFilter(filterParameters);
-                break;
-            case SMALLER_THAN:
-                filter = new SmallerThanFilter(filterParameters);
-                break;
-            case BETWEEN:
-                filter = new BetweenFilter(filterParameters);
-                break;
-            case FILE:
-                filter = new FileFilter(filterParameters);
-                break;
-            case CONTAINS:
-                filter = new ContainsFilter(filterParameters);
-                break;
-            case PREFIX:
-                filter = new PrefixFilter(filterParameters);
-                break;
-            case SUFFIX:
-                filter = new SuffixFilter(filterParameters);
-                break;
-            case WRITABLE:
-                filter = new WritableFilter(filterParameters);
-                break;
-            case EXECUTABLE:
-                filter = new ExecutableFilter(filterParameters);
-                break;
-            case HIDDEN:
-                filter = new HiddenFilter(filterParameters);
-                break;
-            case ALL:
-                filter = new AllFilter(filterParameters);
-                break;
-            default:
-                throw new Type1Exception();
+        try {
+            switch (filterName) {
+                case GREATER_THAN:
+                    filter = new GreaterThanFilter(filterParameters);
+                    break;
+                case SMALLER_THAN:
+                    filter = new SmallerThanFilter(filterParameters);
+                    break;
+                case BETWEEN:
+                    filter = new BetweenFilter(filterParameters);
+                    break;
+                case FILE:
+                    filter = new FileFilter(filterParameters);
+                    break;
+                case CONTAINS:
+                    filter = new ContainsFilter(filterParameters);
+                    break;
+                case PREFIX:
+                    filter = new PrefixFilter(filterParameters);
+                    break;
+                case SUFFIX:
+                    filter = new SuffixFilter(filterParameters);
+                    break;
+                case WRITABLE:
+                    filter = new WritableFilter(filterParameters);
+                    break;
+                case EXECUTABLE:
+                    filter = new ExecutableFilter(filterParameters);
+                    break;
+                case HIDDEN:
+                    filter = new HiddenFilter(filterParameters);
+                    break;
+                case ALL:
+                    filter = new AllFilter(filterParameters);
+                    break;
+                default:
+                    throw new Type1Exception();
+            }
+            return filter;
+
+        } catch (Type1Exception ignored) {
+            throw new Type1Exception();
         }
-        return filter;
     }
 
 

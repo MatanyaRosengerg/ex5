@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class DirectoryProcessor {
 
-    private static final String ARGS_NUM_ERROR = "number of arguments must be 2";
-
     public static void main(String[] args) {
         try {
             analyzeArgs(args); //Todo expand to do all
@@ -27,7 +25,7 @@ public class DirectoryProcessor {
 
     private static void analyzeArgs(String[] args) throws Type2Exception {
         if (args.length != 2) {
-            throw new Type2Exception(ARGS_NUM_ERROR);
+            throw new Type2Exception();
         }
 
     }

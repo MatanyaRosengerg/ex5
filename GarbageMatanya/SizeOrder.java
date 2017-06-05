@@ -18,7 +18,7 @@ public class SizeOrder extends Order {
      */
     @Override
     protected void setCommandParameters(String[] orderLine) throws Type1Exception {
-        //TODO implement
+        //T O D O implement
     }
 
     /**

@@ -5,7 +5,6 @@ import filesprocessing.CommandSection;
 import filesprocessing.exception.Type1Exception;
 import filesprocessing.order.*;
 
-//TODO - document class
 public class FileComparatorFactory {
 
 
@@ -19,6 +18,12 @@ public class FileComparatorFactory {
     /** The user format for using the REVERSE suffix */
     private static final String REVERSE = "REVERSE";
 
+    /**
+     * Validate command and get an appropriate comperator for the command.
+     * @param orderParameters The splitted command, word by word
+     * @return Comperator object that compares according to the given command
+     * @throws Type1Exception Throw a type 1 exception if command is invalid
+     */
     public static FileComparator getOrderByCommand(String[] orderParameters) throws Type1Exception {
 
         //assert that the line isn't empty (from the way the factory constructed it...)

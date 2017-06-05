@@ -76,7 +76,7 @@ public abstract class Filter {
     /**
      * Set the NOT command according to the suffix. This is done only after verifying the the format of
      * the command line is good.
-     */ //TODO - make it throw and check the length == numOfParams+2 && suffix == 'NOT'
+     */
     private void setNOTCommand() throws Type1Exception {
         if (filterParameters.length == numOfParams + 2) {
             String commandSuffix = filterParameters[filterParameters.length - 1];

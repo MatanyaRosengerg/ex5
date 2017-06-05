@@ -17,7 +17,7 @@ public class TypeOrder extends Order {
      * @throws Type1Exception Throw Type1 Exception if the parameters are wrong
      */
     protected void setCommandParameters(String[] orderLine) throws Type1Exception {
-        //TODO implement
+        //T O D O implement
     }
 
     /**
