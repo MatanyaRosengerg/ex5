@@ -1,68 +1,42 @@
 package filesprocessing.factories;
 
+import filesprocessing.exception.Type2Exception;
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO - Ask permission to copy code from oop staff...!!
+
 public class FilesToArrayFactory {
 
-        /**
-         * Reads a text file (such that each line contains a single word),
-         * and returns a string array of its lines.
-         * @param fileName Text file to read.
-         * @return Array with the file's content (returns null if the IOException occurred).
-         */
-        public static String[] getCommandLines(String fileName) {
-            // A list to hold the file's content
-            List<String> fileContent = new ArrayList<String>();
+    private static final String READ_FILE_ERROR_MESSAGE = "Error in opening COMMANDS file";
+    /**
+     * Returns the lines of the commands file in an array
+     *
+     * @param commandsPath - The path of the commands file (may be absolute or relative)
+     * @return - The lines of the commands file in an array as String[].
+     */
+    public static String[] getCommandLines(String commandsPath) throws Type2Exception {
+        try {
+            // A list for the file's lines
+            List<String> commandLinesList = new ArrayList<String>();
 
-            // Reader object for reading the file
-            BufferedReader reader = null;
 
-            try {
-                // Open a reader
-                reader = new BufferedReader(new FileReader(fileName));
+            // Create a new reader to read the file's lines
+            BufferedReader reader = new BufferedReader(new FileReader(commandsPath));
 
-                // Read the first line
-                String line = reader.readLine();
+            //Add file lines to fileContent
+            String line = reader.readLine();
+            while (line != null) {commandLinesList.add(line); line = reader.readLine();}
 
-                // Go over the rest of the file
-                while (line != null) {
+            reader.close();
 
-                    // Add the line to the list
-                    fileContent.add(line);
+            // Convert the list to a String array and return it
+            String[] lines = new String[commandLinesList.size()];
+            commandLinesList.toArray(lines);
+            return lines;
 
-                    // Read the next line
-                    line = reader.readLine();
-                }
-
-            } catch (FileNotFoundException e) {
-                System.err.println("ERROR: The file: " + fileName + " is not found.");
-                return null;
-            } catch (IOException e) {
-                System.err.println("ERROR: An IO error occurred.");
-                return null;
-            } finally {
-                // Try to close the file
-                try {
-                    if(reader != null)
-                        reader.close();
-                    else
-                        return null;
-                } catch (IOException e) {
-                    System.err.println("ERROR: Could not close the file " + fileName + ".");
-                }
-            }
-
-            // Convert the list to an array and return the array
-            String[] result = new String[fileContent.size()];
-            fileContent.toArray(result);
-            return result;
-        }
+        } catch (Exception e) {throw new Type2Exception(READ_FILE_ERROR_MESSAGE);}
     }
-
-
+}

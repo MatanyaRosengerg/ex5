@@ -1,4 +1,4 @@
 FILTER
-smaller_than#200
+smaller_than#200#4
 ORDER
 abs

@@ -17,6 +17,9 @@ public class CommandSection {
     public static final String EMPTY = "";
     private static final String BREAK = "#";
 
+    /** Error messages for missing command lines */
+    private static final String MISSING_FILTER = "ERROR: Missing FILTER sub section heading in line ";
+    private static final String MISSING_ORDER = "ERROR: Missing ORDER sub section heading in line ";
 
     /** indices of the lines in the sections of the commands file */
 
@@ -61,10 +64,10 @@ public class CommandSection {
      */
     private void checkSegmentFormatErrors(String[] commandSegment) throws Type2Exception {
         if (!commandSegment[FILTER_IDX].equals(FILTER)) {
-            throw new Type2Exception();
+            throw new Type2Exception(errorMessage(MISSING_FILTER,headLineIndex+FILTER_IDX));
         }
         if (!commandSegment[ORDER_IDX].equals(ORDER)) {
-            throw new Type2Exception();
+            throw new Type2Exception(errorMessage(MISSING_ORDER,headLineIndex+ORDER_IDX));
         }
     }
 
@@ -92,7 +95,7 @@ public class CommandSection {
         ArrayList<File> filteredDirectory = new ArrayList<>();
         File[] files = directory.listFiles();
         if (files == null) {
-            throw new Type2Exception();
+            throw new Type2Exception("lwygfvwieyrgvyg");
             //TODO - DFUK!! Type2Exception were supposed to be already caught!!
         }
 
