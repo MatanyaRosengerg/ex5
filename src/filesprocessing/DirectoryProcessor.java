@@ -13,6 +13,10 @@ public class DirectoryProcessor {
 
     private static final String ARGS_NUM_ERROR = "number of arguments must be 2";
 
+    /**
+     * Main flow
+     * @param args Command arguments
+     */
     public static void main(String[] args) {
         try {
             analyzeArgs(args);
@@ -27,6 +31,9 @@ public class DirectoryProcessor {
         }
     }
 
+    /*
+    * Analyze the arguments
+     */
     private static void analyzeArgs(String[] args) throws Type2Exception {
         if (args.length != 2) {
             throw new Type2Exception(ARGS_NUM_ERROR);
@@ -34,6 +41,9 @@ public class DirectoryProcessor {
 
     }
 
+    /*
+    * Execute all command sections from file
+     */
     private static void executeAll(ArrayList<CommandSection> commandSections, File directory) throws
             Type2Exception {
         for (CommandSection commandSection : commandSections) {

@@ -8,17 +8,26 @@ import java.io.File;
 
 public abstract class SizeFilter extends Filter {
 
-    /** Conversion ratio between bytes and k-bytes */
-    public static final int BYTE_TO_KB = 1024;
+    /* Conversion ratio between bytes and k-bytes */
+    private static final int BYTE_TO_KB = 1024;
 
     /** Delegates construction to Filter */
     protected SizeFilter(String[] filterParameters, int numOfParams) throws Type1Exception {
         super(filterParameters, numOfParams);
     }
 
+    /**
+     * Check if a file passed the filter
+     * @param toFilter the file to check
+     * @return True if so
+     */
     @Override
     protected abstract boolean matchesFilter(File toFilter);
 
+    /**
+     * Set the command parameters
+     * @throws Type1Exception if invalid parameters
+     */
     @Override
     protected abstract void setCommandParameters() throws Type1Exception;
 

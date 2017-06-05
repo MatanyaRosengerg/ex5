@@ -28,7 +28,6 @@ public class Order {
         fileComparator = FileComparatorFactory.getOrderByCommand(orderParameters);
     }
 
-
     /**
      * Construct default order.
      */

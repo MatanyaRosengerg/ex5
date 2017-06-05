@@ -17,16 +17,29 @@ public class GreaterThanFilter extends SizeFilter {
     /** the property filter argument index */
     private static final int MIN_SIZE_IDX = 1;
 
-
+    /**
+     * Constructor
+     * @param filterParameters Array of splitted command
+     * @throws Type1Exception if invalid command
+     */
     public GreaterThanFilter(String[] filterParameters) throws Type1Exception {
         super(filterParameters, NUM_OF_PARAMS);
     }
 
+    /**
+     * Check if file's size is larger than min size
+     * @param toFilter the file to check
+     * @return True if so
+     */
     @Override
     protected boolean matchesFilter(File toFilter) {
         return toFilter.length() > minSize;
     }
 
+    /**
+     * Set command parameters
+     * @throws Type1Exception if invalid command
+     */
     @Override
     protected void setCommandParameters() throws Type1Exception {minSize = getParameter(MIN_SIZE_IDX);}
 

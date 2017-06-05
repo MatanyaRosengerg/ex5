@@ -24,7 +24,12 @@ public class FilterFactory {
     private static final String HIDDEN = "hidden";
     private static final String ALL = "all";
 
-
+    /**
+     * Get filter from a command.
+     * @param filterParameters String array of the command
+     * @return Filter object
+     * @throws Type1Exception Throws exception if error in filter's name
+     */
     public static Filter getFilterByCommand(String[] filterParameters) throws Type1Exception {
 
         String filterName = filterParameters[CommandSection.FILTER_NAME_IDX];

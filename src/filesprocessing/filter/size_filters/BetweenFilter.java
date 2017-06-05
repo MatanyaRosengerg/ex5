@@ -18,16 +18,29 @@ public class BetweenFilter extends SizeFilter {
     private static final int MIN_SIZE_IDX = 1;
     private static final int MAX_SIZE_IDX = 2;
 
-
+    /**
+     * Constructor
+     * @param filterParameters Array of splitted command
+     * @throws Type1Exception if invalid command
+     */
     public BetweenFilter(String[] filterParameters) throws Type1Exception {
         super(filterParameters, NUM_OF_PARAMS);
     }
 
+    /**
+     * Check if file is between min size to max size
+     * @param toFilter the file to check
+     * @return True if so
+     */
     @Override
     protected boolean matchesFilter(File toFilter) {
         return (toFilter.length() >= minSize && toFilter.length() <= maxSize);
     }
 
+    /**
+     * Set command parameters
+     * @throws Type1Exception if invalid command
+     */
     @Override
     protected void setCommandParameters() throws Type1Exception {
         minSize = getParameter(MIN_SIZE_IDX);

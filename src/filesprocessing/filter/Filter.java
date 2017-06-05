@@ -42,7 +42,6 @@ public abstract class Filter {
      */
     protected Filter() {this.numOfParams = 0;}
 
-
     /**
      * This method determines weather a file meets the filter *FULL-command* condition
      *
@@ -58,7 +57,6 @@ public abstract class Filter {
      */
     protected abstract void setCommandParameters() throws Type1Exception;
 
-
     /**
      * Filteres the files according to wheather or not they match the filter command line conditions.
      *
@@ -71,7 +69,6 @@ public abstract class Filter {
         }
         return filteredFiles;
     }
-
 
     /**
      * Set the NOT command according to the suffix. This is done only after verifying the the format of

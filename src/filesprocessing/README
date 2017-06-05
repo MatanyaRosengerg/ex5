@@ -1,0 +1,25 @@
+matanya
+ofriwi
+
+
+1. Design:
+    1. We divided the project to packages. A package for filters, for orders, for factories and for
+     exceptions. The packages are important for modularity and easy and specified import.
+    2. FILTERS: all filters implement from a parent Filter. They divide to categories, Size filters,
+     Contains filters and Property filters. This diviation helped preventing code duplication.
+    3. ORDER: We used one Order class, that has a Comperator property. The comperator contains a "rule" for
+     compering (Size, Type, Abs path etc.)
+    4. FACTORIES: We created some factories, each one has specific purpose, one create Filters, one
+     for Comperators, one for Command Sections (4 lines) and one that converts text to String array.
+    5. EXCEPTIONS: We created two simple classes that implies exceptions, one for each type. Then we could
+     catch each type of exception and react appropriately.
+
+2. Exceptions:
+    We have two types of exceptions: Type 1 and Type 2.
+    The main function is wrapped with type 2 catcher. If a type 2 exception is thrown, the program is
+     quited with error.
+    Every filter and order command is wrapped with Type 1, so when an exception is thrown it displays an
+     error and choose the default command.
+
+3. We used an ArrayList. This data structure was convenient because we didn't have to specify it's size,
+ and we also had the sort() method that helped us order the files.

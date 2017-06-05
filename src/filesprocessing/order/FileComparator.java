@@ -18,6 +18,12 @@ public abstract class FileComparator implements Comparator<File> {
         else { this.isReversed = 1; }
     }
 
+    /**
+     * Compare two files according to the comperator's type.
+     * @param file1 First file to compare
+     * @param file2 Second file
+     * @return Comperation results
+     */
     @Override
     public int compare(File file1, File file2) {
         int compare = subCompare(file1, file2);

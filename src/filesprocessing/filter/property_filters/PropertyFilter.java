@@ -21,7 +21,11 @@ public abstract class PropertyFilter extends Filter {
     /** determines if the filter argument is "YES" or "NO" */
     private boolean yesCondition;
 
-
+    /**
+     * Constructor
+     * @param filterParameters Array of splitted command
+     * @throws Type1Exception if invalid command
+     */
     PropertyFilter(String[] filterParameters) throws Type1Exception {super(filterParameters, NUM_OF_PARAMS); }
 
     /**
@@ -32,10 +36,18 @@ public abstract class PropertyFilter extends Filter {
      */
     protected abstract boolean matchesSubFilter(File toFilter);
 
+    /**
+     * Check if the file is filtered.
+     * @param toFilter the file to check.
+     * @return True if passed the filter.
+     */
     @Override
     protected boolean matchesFilter(File toFilter) {return yesCondition == matchesSubFilter(toFilter);}
 
-
+    /**
+     * Set the command parameters.
+     * @throws Type1Exception if invalid parameters.
+     */
     @Override
     protected void setCommandParameters() throws Type1Exception {
         if (!(filterParameters[CONDITION_IDX].equals(NO) || filterParameters[CONDITION_IDX].equals(YES))) {
